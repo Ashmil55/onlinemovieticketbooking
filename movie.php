@@ -1,14 +1,13 @@
 <?php
-include('connectdb.php');
-
-session_start();
-$userid = $_SESSION['userid'];
-$username = $_SESSION['username'];
-$useremail = $_SESSION['useremail'];
-// ini_set('display_errors',1);
-// ini_set('display_startup_errors',1);
-// error_reporting(E_ALL);
-
+// include('connectdb.php');
+//
+// session_start();
+// $userid = $_SESSION['userid'];
+// $username = $_SESSION['username'];
+// $useremail = $_SESSION['useremail'];
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
 ?>
 
 
@@ -16,65 +15,65 @@ $useremail = $_SESSION['useremail'];
 
 
  <?php
- if (isset($_POST['rate'])){
-   $movieid = $_GET['movieid'];
-
-
-   $getmovie = "SELECT * FROM movies WHERE movieid = $movieid ";
-   $rungetmovie = mysqli_query($conn, $getmovie);
-   $movie = mysqli_fetch_assoc($rungetmovie);
-   // echo "I am here";
-   $rating = $_POST['rating'];
-   // echo $rating."\n";
-   $currentrating = $movie['averagerating'];
-   // echo $currentrating;
-   $numberofusersrated = $movie['numberofusersrated'];
-
-   // echo $numberofusersrated;
-
-   $currentrating = (($currentrating * $numberofusersrated) + $rating)/($numberofusersrated+1);
-
-   $currentrating = round($currentrating,2);
-   $numberofusersrated = $numberofusersrated+1;
-   $insertrating = "UPDATE movies SET averagerating = $currentrating, numberofusersrated = $numberofusersrated WHERE movieid = $movieid ";
-   // echo $insertrating;
-   mysqli_query($conn, $insertrating);
-
- }
+ // if (isset($_POST['rate'])){
+ //   $movieid = $_GET['movieid'];
+ //
+ //
+ //   $getmovie = "SELECT * FROM movies WHERE movieid = $movieid ";
+ //   $rungetmovie = mysqli_query($conn, $getmovie);
+ //   $movie = mysqli_fetch_assoc($rungetmovie);
+ //   // echo "I am here";
+ //   $rating = $_POST['rating'];
+ //   // echo $rating."\n";
+ //   $currentrating = $movie['averagerating'];
+ //   // echo $currentrating;
+ //   $numberofusersrated = $movie['numberofusersrated'];
+ //
+ //   // echo $numberofusersrated;
+ //
+ //   $currentrating = (($currentrating * $numberofusersrated) + $rating)/($numberofusersrated+1);
+ //
+ //   $currentrating = round($currentrating,2);
+ //   $numberofusersrated = $numberofusersrated+1;
+ //   $insertrating = "UPDATE movies SET averagerating = $currentrating, numberofusersrated = $numberofusersrated WHERE movieid = $movieid ";
+ //   // echo $insertrating;
+ //   mysqli_query($conn, $insertrating);
+ //
+ // }
 ?>
 
 <?php
-$movieid = $_GET['movieid'];
-
-
-$getmovie = "SELECT * FROM movies WHERE movieid = $movieid ";
-$rungetmovie = mysqli_query($conn, $getmovie);
-$movie = mysqli_fetch_assoc($rungetmovie);
+// $movieid = $_GET['movieid'];
+//
+//
+// $getmovie = "SELECT * FROM movies WHERE movieid = $movieid ";
+// $rungetmovie = mysqli_query($conn, $getmovie);
+// $movie = mysqli_fetch_assoc($rungetmovie);
 
  ?>
 
  <!-- Getting data from shows table -->
  <?php
  // Getting dates
-$getdates = "SELECT DISTINCT date FROM shows WHERE movieid = $movieid ";
-$rungetdates = mysqli_query($conn, $getdates);
-while($row = mysqli_fetch_assoc($rungetdates)){
-  $dates[] = $row;
-}
-
-// Getting times
-$gettimes = "SELECT DISTINCT time FROM shows WHERE movieid = $movieid ";
-$rungettimes = mysqli_query($conn, $gettimes);
-while($row = mysqli_fetch_assoc($rungettimes)){
-  $times[] = $row;
-}
-
-// Getting shows
-$getshowdata = "SELECT * FROM shows WHERE movieid = $movieid";
-$rungetshowdata = mysqli_query($conn, $getshowdata);
-while ($row = mysqli_fetch_assoc($rungetshowdata)){
-  $shows[] = $row;
-}
+// $getdates = "SELECT DISTINCT date FROM shows WHERE movieid = $movieid ";
+// $rungetdates = mysqli_query($conn, $getdates);
+// while($row = mysqli_fetch_assoc($rungetdates)){
+//   $dates[] = $row;
+// }
+//
+// // Getting times
+// $gettimes = "SELECT DISTINCT time FROM shows WHERE movieid = $movieid ";
+// $rungettimes = mysqli_query($conn, $gettimes);
+// while($row = mysqli_fetch_assoc($rungettimes)){
+//   $times[] = $row;
+// }
+//
+// // Getting shows
+// $getshowdata = "SELECT * FROM shows WHERE movieid = $movieid";
+// $rungetshowdata = mysqli_query($conn, $getshowdata);
+// while ($row = mysqli_fetch_assoc($rungetshowdata)){
+//   $shows[] = $row;
+// }
 
 ?>
 
@@ -134,8 +133,6 @@ while ($row = mysqli_fetch_assoc($rungetshowdata)){
   <body>
     <div id = "navbar">
       <form>
-        <button type="submit" name="home" formaction="home.php" formmethod="post">Home</button>
-        <button type="submit" name="bookings" formaction="bookings.php" formmethod="post">Bookings</button>
         <button type="submit" name="logout" formaction="login.php" formmethod="post">Logout</button>
       </form>
     </div>
@@ -143,16 +140,16 @@ while ($row = mysqli_fetch_assoc($rungetshowdata)){
 
     <div id="movie">
 
-      <h2><?php echo $movie['name'];?></h2>
+      <h2><?php //echo $movie['name'];?></h2>
 
       <div id = "image">
-        <img src=<?php echo $movie['imageurl']; ?>>
+        <img src=<?php //echo $movie['imageurl']; ?>>
       </div>
 
       <div id = "summary">
-        <?php echo $movie['summary']; ?>
+        <?php //echo $movie['summary']; ?>
         <p>
-          <b>Average rating : <?php echo $movie['averagerating'];?></b> (<?php echo $movie['numberofusersrated'];?>)
+          <b>Average rating : <?php //echo $movie['averagerating'];?></b> (<?php //echo $movie['numberofusersrated'];?>)
         </p>
 
         <p>
@@ -163,7 +160,7 @@ while ($row = mysqli_fetch_assoc($rungetshowdata)){
             <input type="radio" name="rating" value="3">3</input>
             <input type="radio" name="rating" value="4">4</input>
             <input type="radio" name="rating" value="5">5</input>
-            <button type="submit" name="rate" formaction="movie.php?movieid=<?php echo $movie['movieid'];?>" formmethod="post">Rate</button>
+            <button type="submit" name="rate" formaction="movie.php?movieid=<?php //echo $movie['movieid'];?>" formmethod="post">Rate</button>
           </form>
         </p>
 
@@ -171,25 +168,21 @@ while ($row = mysqli_fetch_assoc($rungetshowdata)){
           Book your tickets:
           <form>
             Choose a date:
-            <select name = "date">
+            <!-- <select name = "date">
               <?php
-                foreach ($dates as $date) { ?>
-                  <option value="<?php echo $date["date"]; ?>"><?php echo $date["date"]; ?></option>
+                //foreach ($dates as $date { ?>
+                  <option value="<?php //echo $date["date"]; ?>"><?php //echo $date["date"]; ?></option>
               <?php	}
               ?>
             </select></br>
             Choose a time:
             <select name = "time">
               <?php
-                foreach ($times as $time) { ?>
-                  <option value="<?php echo $time["time"]; ?>"><?php echo $time["time"]; ?></option>
+                //foreach ($times as $time { ?>
+                  <option value="<?php //echo $time["time"]; ?>"><?php //echo $time["time"]; ?></option>
               <?php	}
               ?>
-            </select></br>
-            <!-- Enter the number of tickets you want
-            <input type="number" name="numberoftickets"></input> -->
-
-            <button type="submit" name="selectseats" formaction="movie.php?movieid=<?php echo $movieid; ?>" formmethod="post">Select your seats</button>
+            </select> -->
 
           </form>
         </p>
@@ -200,18 +193,3 @@ while ($row = mysqli_fetch_assoc($rungetshowdata)){
 
   </body>
 </html>
-
-
-<?php
-
-if (isset($_POST['selectseats'])){
-  $_SESSION['showdate'] = $_POST['date'];
-  $_SESSION['showtime'] =  $_POST['time'];
-
-  // $_SESSION['ticketcount'] = $_POST['numberoftickets'];
-  $movieid = $_GET['movieid'];
-  $_SESSION['movieid'] = $movieid;
-  header("Location: selectseats.php?movieid=$movieid");
-}
-
- ?>
