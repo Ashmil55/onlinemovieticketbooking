@@ -1,5 +1,4 @@
 # onlinemovieticketbooking
 
-This is an online movie booking site. Done to increase my web programming skills.
+Website to book tickets online. Used HTML, CSS, Php, Javascript and MySQL. 
 
-IT IS NOT COMPLETE YET.
